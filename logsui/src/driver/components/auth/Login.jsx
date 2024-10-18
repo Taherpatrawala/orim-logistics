@@ -23,6 +23,7 @@ const DriverLogin = () => {
       );
       if (data) {
         Cookies.set("driverToken", data.data.token);
+        Cookies.set("userType", "driver");
         navigate("/driver/bookings");
       }
     } catch (error) {

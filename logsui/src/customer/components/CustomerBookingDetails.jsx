@@ -150,13 +150,35 @@ const DetailValue = tw.span`
 const StatusBadge = tw.span`
   px-2 py-1 rounded-full text-sm font-medium
   ${(props) => {
-    switch (props.status.toLowerCase()) {
-      case "pending":
+    switch (props.status) {
+      case "Pending":
         return "bg-yellow-100 text-yellow-800";
-      case "in progress":
+      case "Accepted":
         return "bg-blue-100 text-blue-800";
-      case "completed":
+      case "Pending Pickup":
+        return "bg-orange-100 text-orange-800"; // New status
+      case "En Route to Pickup":
+        return "bg-indigo-100 text-indigo-800"; // New status
+      case "Arrived at Pickup":
+        return "bg-teal-100 text-teal-800"; // New status
+      case "Goods Collected":
+        return "bg-green-100 text-green-800"; // New status
+      case "En Route to Dropoff":
+        return "bg-lightblue-100 text-lightblue-800"; // New status
+      case "At Dropoff Location":
+        return "bg-cyan-100 text-cyan-800"; // New status
+      case "Delivery in Progress":
+        return "bg-purple-100 text-purple-800"; // New status
+      case "Completed":
         return "bg-green-100 text-green-800";
+      case "Delayed":
+        return "bg-red-100 text-red-800"; // New status
+      case "Cancelled":
+        return "bg-gray-300 text-gray-800"; // New status
+      case "Returned to Sender":
+        return "bg-orange-200 text-orange-800"; // New status
+      case "Rescheduled":
+        return "bg-yellow-200 text-yellow-800"; // New status
       default:
         return "bg-gray-100 text-gray-800";
     }

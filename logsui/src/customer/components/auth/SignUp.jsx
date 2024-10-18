@@ -47,6 +47,7 @@ const CustomerSignup = () => {
       .then((response) => response.json())
       .then((data) => {
         Cookies.set("token", data.token);
+        Cookies.set("userType", "customer");
         navigate("/search");
       })
       .catch((error) => {

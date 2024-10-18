@@ -7,7 +7,13 @@ const driverSchema = new mongoose.Schema({
   phone: String,
   vehicleType: {
     type: String,
-    enum: ["UberX", "UberXL", "Black", "Comfort", "Black SUV"],
+    enum: [
+      "Small Van",
+      "Medium Truck",
+      "Large Truck",
+      "Box Truck",
+      "Container Truck",
+    ],
   },
   location: {
     type: { type: String, enum: ["Point"], default: "Point" },

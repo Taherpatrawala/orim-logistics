@@ -30,7 +30,7 @@ const adminJs = new AdminJS({
   defaultTheme: light.id,
   availableThemes: [dark, light],
   branding: {
-    companyName: "Atlan Logistics",
+    companyName: "Orim Logistics",
     softwareBrothers: false,
     // logo: '/path-to-your-logo.png', // Update if necessary
   },

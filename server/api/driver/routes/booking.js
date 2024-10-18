@@ -23,4 +23,8 @@ bookingRoutes
   .route("/getBookingId")
   .get(authoriseDriver, bookingController.getBookingId);
 
+bookingRoutes
+  .route("/updateStatus")
+  .post(authoriseDriver, bookingController.updateBookingStatus);
+
 export default bookingRoutes;

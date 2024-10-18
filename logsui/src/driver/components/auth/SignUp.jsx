@@ -52,6 +52,7 @@ const DriverSignup = () => {
       .then((response) => response.json())
       .then((data) => {
         Cookies.set("driverToken", data.token);
+        Cookies.set("userType", "driver");
         navigate("/driver/bookings");
       })
       .catch((error) => {
@@ -180,11 +181,11 @@ const DriverSignup = () => {
                   required
                 >
                   <option value="">Select a vehicle type</option>
-                  <option value="UberX">UberX</option>
-                  <option value="UberXL">UberXL</option>
-                  <option value="Black">Black</option>
-                  <option value="Comfort">Comfort</option>
-                  <option value="Black SUV">Black SUV</option>
+                  <option value="Small Van">Small Van</option>
+                  <option value="Medium Truck">Medium Truck</option>
+                  <option value="Large Truck">Large Truck</option>
+                  <option value="Box Truck">Box Truck</option>
+                  <option value="Container Truck">Container Truck</option>
                 </select>
               </div>
             </div>

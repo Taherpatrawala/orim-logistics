@@ -1,4 +1,4 @@
-import Booking from "../../../models/bookings.js";
+import ALL_MODELS from "../../utils/allModels.js";
 
 const bookingController = {};
 
@@ -15,7 +15,7 @@ bookingController.book = async (req, res) => {
   } = req.body;
 
   try {
-    const booking = new Booking({
+    const booking = new ALL_MODELS.BOOKING({
       userId,
       driverId,
       pickupLocation,
@@ -41,7 +41,15 @@ bookingController.book = async (req, res) => {
 // Get all bookings for drivers (status: Pending)
 bookingController.getPendingBookings = async (req, res) => {
   try {
-    const bookings = await Booking.find({ status: "Pending" });
+    const driverId = req.driver.userId;
+    const driver = await ALL_MODELS.DRIVER.findById(driverId);
+
+    if (!driver.available) {
+      return res
+        .status(403)
+        .json({ message: "You already have a pending booking!." });
+    }
+    const bookings = await ALL_MODELS.BOOKING.find({ status: "Pending" });
     res.status(200).json({ bookings });
   } catch (error) {
     res
@@ -54,7 +62,7 @@ bookingController.getBookingDetails = async (req, res) => {
   const { bookingId } = req.params;
 
   try {
-    const booking = await Booking.findById(bookingId)
+    const booking = await ALL_MODELS.BOOKING.findById(bookingId)
       .populate("userId")
       .populate("driverId");
 
@@ -77,7 +85,8 @@ bookingController.acceptBooking = async (req, res) => {
   const driverId = req.driver.userId;
 
   try {
-    const booking = await Booking.findById(bookingId);
+    const booking = await ALL_MODELS.BOOKING.findById(bookingId);
+    const driver = await ALL_MODELS.DRIVER.findById(driverId);
 
     if (!booking) {
       return res.status(404).json({ message: "Booking not found." });
@@ -93,6 +102,9 @@ bookingController.acceptBooking = async (req, res) => {
     booking.driverId = driverId;
     await booking.save();
 
+    driver.available = false;
+    await driver.save();
+
     res.status(200).json({ message: "Booking accepted successfully!" });
   } catch (error) {
     res
@@ -105,7 +117,10 @@ bookingController.acceptedBookings = async (req, res) => {
   const driverId = req.driver.userId;
 
   try {
-    const bookings = await Booking.find({ driverId, status: "Accepted" });
+    const bookings = await ALL_MODELS.BOOKING.find({
+      driverId,
+      status: "Accepted",
+    });
 
     res.status(200).json({ bookings });
   } catch (error) {
@@ -119,7 +134,7 @@ bookingController.getBookingId = async (req, res) => {
   const driverId = req.driver.userId;
 
   try {
-    const booking = await Booking.findOne({ driverId });
+    const booking = await ALL_MODELS.BOOKING.findOne({ driverId });
 
     if (!booking) {
       return res.status(404).json({ message: "Booking not found." });
@@ -130,6 +145,41 @@ bookingController.getBookingId = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error in fetching booking details", error: error });
+  }
+};
+
+bookingController.updateBookingStatus = async (req, res) => {
+  const { bookingId, status } = req.body;
+  const driverId = req.driver.userId;
+
+  try {
+    const booking = await ALL_MODELS.BOOKING.findById(bookingId);
+    const driver = await ALL_MODELS.DRIVER.findById(driverId);
+
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found." });
+    }
+    console.log(booking.driverId.toString(), driverId);
+
+    if (booking.driverId.toString() !== driverId) {
+      return res
+        .status(403)
+        .json({ message: "Unauthorized action for this driver." });
+    }
+
+    booking.status = status;
+    await booking.save();
+
+    if (status.toLowerCase() === "completed") {
+      driver.available = true;
+      await driver.save();
+    }
+
+    res.status(200).json({ message: "Booking status updated successfully!" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error in updating booking status", error: error });
   }
 };
 

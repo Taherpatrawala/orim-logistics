@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import NavbarWrapper from "./Navbar/NavbarWrapper";
 import Search from "./customer/Search"; // Adjust path according to your file structure
 import Confirm from "./customer/Confirm"; // Adjust path according to your file structure
 import MapComponent from "./customer/components/leafMap";
@@ -13,12 +14,14 @@ import DriverLogin from "./driver/components/auth/Login";
 import DriverBookings from "./driver/components/DriverBookings";
 import DriverAcceptedBookings from "./driver/components/AcceptedBooking";
 import BookingDetails from "./driver/components/BookingDetails";
+import DriverProfile from "./driver/components/DriverProfile";
 
 import AllBookings from "./customer/components/AllBookings";
 
 function App() {
   return (
     <BrowserRouter>
+      <NavbarWrapper />
       <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -36,6 +39,7 @@ function App() {
             element={<CustomerBookingDetails />}
           />
 
+          <Route path="/driver/profile" element={<DriverProfile />} />
           <Route path="/driver/bookings" element={<DriverBookings />} />
           <Route
             path="/driver/bookings/accepted"

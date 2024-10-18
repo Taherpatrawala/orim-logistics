@@ -38,36 +38,33 @@ export const LiveMap = (props) => {
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">Atlan Logistics</a> contributors',
+          '&copy; <a href="https://www.openstreetmap.org/copyright">Orim Logistics</a> contributors',
       }).addTo(map);
 
       // Add pickup and dropoff markers with validation
-      if (props.pickupCoordinates?.lat && props.pickupCoordinates?.lng) {
+      if (props.pickupCoordinates && props.pickupCoordinates) {
         addToMap(
           map,
-          [props.pickupCoordinates.lat, props.pickupCoordinates.lng],
+          [props.pickupCoordinates[1], props.pickupCoordinates[0]],
           pickupIcon
         );
       }
 
-      if (props.dropoffCoordinates?.lat && props.dropoffCoordinates?.lng) {
+      if (props.dropoffCoordinates && props.dropoffCoordinates) {
         addToMap(
           map,
-          [props.dropoffCoordinates.lat, props.dropoffCoordinates.lng],
+          [props.dropoffCoordinates[1], props.dropoffCoordinates[0]],
           dropoffIcon
         );
       }
 
-      if (props.pickupCoordinates?.lat && props.dropoffCoordinates?.lat) {
+      if (props.pickupCoordinates && props.dropoffCoordinates) {
         L.Routing.control({
           waypoints: [
+            L.latLng([props.pickupCoordinates[1], props.pickupCoordinates[0]]),
             L.latLng([
-              props.pickupCoordinates.lat,
-              props.pickupCoordinates.lng,
-            ]),
-            L.latLng([
-              props.dropoffCoordinates.lat,
-              props.dropoffCoordinates.lng,
+              props.dropoffCoordinates[1],
+              props.dropoffCoordinates[0],
             ]),
           ],
           lineOptions: { styles: [{ color: "blue", weight: 5, opacity: 0.7 }] },
