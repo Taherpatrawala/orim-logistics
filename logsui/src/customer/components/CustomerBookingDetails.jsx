@@ -88,7 +88,7 @@ function CustomerBookingDetails() {
           </DetailItem>
           <DetailItem>
             <DetailLabel>Estimated Price:</DetailLabel>
-            <DetailValue>${bookingDetails.estimatedPrice}</DetailValue>
+            <DetailValue>₹{bookingDetails.estimatedPrice}</DetailValue>
           </DetailItem>
           <DetailItem>
             <DetailLabel>Coordinates (Pickup):</DetailLabel>

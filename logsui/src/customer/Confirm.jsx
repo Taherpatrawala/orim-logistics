@@ -30,11 +30,11 @@ function Confirm() {
 
   return (
     <Wrapper>
-      <BackButtonContainer>
+      {/* <BackButtonContainer>
         <Link to="/search">
           <BackButton src="https://img.icons8.com/ios-filled/50/000000/left.png" />
         </Link>
-      </BackButtonContainer>
+      </BackButtonContainer> */}
       {pickupCoordinates && dropoffCoordinates && (
         <Map
           pickupCoordinates={pickupCoordinates}

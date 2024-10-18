@@ -70,7 +70,11 @@ const Driver = () => {
     }
   }, [bookingId]);
 
-  return <div>Driver connected and sharing live location...</div>;
+  return (
+    <div className="text-center text-green-400">
+      Driver connected and sharing live location...
+    </div>
+  );
 };
 
 export default Driver;

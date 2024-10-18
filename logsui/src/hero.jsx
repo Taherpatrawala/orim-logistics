@@ -19,7 +19,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
       <h1 className="text-4xl font-bold mb-8 text-gray-800">
-        Welcome to Our Service
+        Welcome to Orim Logistics!
       </h1>
       <div className="flex space-x-6">
         <SignInOption

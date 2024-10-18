@@ -48,7 +48,10 @@ const DriverProfile = () => {
       {profileData && (
         <ContentWrapper>
           <ProfileHeader>
-            <Avatar src="/path/to/avatar.jpg" alt="Driver Avatar" />
+            <Avatar
+              src="https://cdn.iconscout.com/icon/free/png-512/free-driver-icon-download-in-svg-png-gif-file-formats--user-man-avatar-male-profession-pack-people-icons-1518720.png?f=webp&w=512"
+              alt="Driver Avatar"
+            />
             <ProfileInfo>
               <ProfileName>{profileData.name}</ProfileName>
               <ProfileEmail>{profileData.email}</ProfileEmail>

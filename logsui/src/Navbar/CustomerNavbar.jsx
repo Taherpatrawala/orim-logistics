@@ -1,11 +1,23 @@
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const CustomerNavbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    Cookies.remove("userType");
+    navigate("/");
+  };
   return (
     <NavWrapper>
       <Logo>
-        <Link to="/">BrandLogo</Link>
+        <Link to="/">
+          <span className="text-blue-500">Orim</span>
+          <span className="text-red-500">Logistics</span>
+        </Link>
       </Logo>
       <NavLinks>
         <NavLink>
@@ -18,7 +30,7 @@ const CustomerNavbar = () => {
           <Link to="/profile">Profile</Link>
         </NavLink>
         <NavLink>
-          <Link to="/logout">Logout</Link>
+          <button onClick={handleLogout}>Logout</button>
         </NavLink>
       </NavLinks>
     </NavWrapper>

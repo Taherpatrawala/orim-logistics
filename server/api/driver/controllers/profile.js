@@ -23,7 +23,7 @@ driverProfileController.getProfileData = async (req, res) => {
     });
     const earnings = await ALL_MODELS.BOOKING.aggregate([
       { $match: { driverId, status: "Completed" } },
-      { $group: { _id: null, totalEarnings: { $sum: "$chargedAmount" } } },
+      { $group: { _id: null, totalEarnings: { $sum: "₹chargedAmount" } } },
     ]);
 
     res.status(200).json({

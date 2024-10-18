@@ -48,7 +48,9 @@ function RideSelector({
       return;
     }
 
-    const estimatedPrice = (rideDuration * selectedCar.multiplier).toFixed(2);
+    const estimatedPrice = (rideDuration * selectedCar.multiplier * 84).toFixed(
+      2
+    );
 
     const bookingData = {
       userId,
@@ -105,7 +107,7 @@ function RideSelector({
               <Service>{car.service}</Service>
               <Time>{(rideDuration.toFixed(0) / 60).toFixed(2)} hr</Time>
             </CarDetails>
-            <Price>${(rideDuration * car.multiplier).toFixed(2)}</Price>
+            <Price>₹{(rideDuration * car.multiplier * 84).toFixed(2)}</Price>
           </Car>
         ))}
       </CarList>

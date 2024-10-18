@@ -1,11 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import tw from "tailwind-styled-components";
+import Cookies from "js-cookie";
 
 const DriverNavbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    Cookies.remove("driverToken");
+    Cookies.remove("userType");
+    navigate("/");
+  };
+
   return (
     <NavWrapper>
       <Logo>
-        <Link to="/">BrandLogo</Link>
+        <Link to="/">
+          <span className="text-blue-500">Orim</span>
+          <span className="text-red-500">Logistics</span>
+        </Link>
       </Logo>
       <NavLinks>
         <NavLink>
@@ -18,7 +30,7 @@ const DriverNavbar = () => {
           <Link to="/driver/profile">Profile</Link>
         </NavLink>
         <NavLink>
-          <Link to="/driver/logout">Logout</Link>
+          <button onClick={handleLogout}>Logout</button>
         </NavLink>
       </NavLinks>
     </NavWrapper>

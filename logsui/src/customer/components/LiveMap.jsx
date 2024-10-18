@@ -20,7 +20,7 @@ const dropoffIcon = new L.Icon({
 });
 
 const driverIcon = new L.Icon({
-  iconUrl: "https://cdn-icons-png.flaticon.com/512/2206/2206368.png", // Add a driver marker icon
+  iconUrl: "http://localhost:5001/truck.png", // Add a driver marker icon
   iconSize: [30, 40],
   iconAnchor: [15, 40],
 });
